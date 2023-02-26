@@ -3,7 +3,7 @@ package com.qdbh.testrabbitmq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.qdbh.testrabbitmq"})
 public class TestRabbitmqApplication {
 
     public static void main(String[] args) {
