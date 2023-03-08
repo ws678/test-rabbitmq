@@ -1,1 +1,24 @@
-
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    #连接超时时间 6秒
+    connection-timeout: 6000
+    # 设置确认模式
+    publisher-confirm-type: correlated
+    # 设置返回模式
+    publisher-returns: true
+    # 投递出错 通知生产者
+    template:
+      mandatory: true
+    listener:
+      # 设置需手动确认
+      direct:
+        acknowledge-mode: manual
+      simple:
+        # Minimum number of listener invoker threads
+        concurrency: 1
+        # Maximum number of listener invoker threads
+        max-concurrency: 5

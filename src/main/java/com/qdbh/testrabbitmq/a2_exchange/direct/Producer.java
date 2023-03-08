@@ -18,19 +18,19 @@ public class Producer {
         Channel channel = connection.createChannel();
 
         //创建交换机
-        channel.exchangeDeclare("直连型交换机", "direct", true, false, null);
+        channel.exchangeDeclare("direct_exchange", "direct", true, false, null);
 
         //声明队列
-        channel.queueDeclare("队列directA", true, false, false, null);
-        channel.queueDeclare("队列directB", true, false, false, null);
+        channel.queueDeclare("queueC", true, false, false, null);
+        channel.queueDeclare("queueD", true, false, false, null);
 
         //绑定交换机与队列
-        channel.queueBind("队列directA", "直连型交换机", "keyForDirectDemoOne");
-        channel.queueBind("队列directB", "直连型交换机", "keyForDirectDemoTwo");
+        channel.queueBind("queueC", "direct_exchange", "email");
+        channel.queueBind("queueD", "direct_exchange", "sms");
 
         //发送数据
         String demoStr = "直连型交换机向DemoOne发送数据";
-        channel.basicPublish("直连型交换机", "keyForDirectDemoOne", null, demoStr.getBytes());
+        channel.basicPublish("direct_exchange", "email", null, demoStr.getBytes());
 
         //关闭连接
         channel.close();
